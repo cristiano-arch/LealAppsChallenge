@@ -8,4 +8,6 @@
     <string name="add_workout_tiet_name">Nome</string>
     <string name="add_workout_tiet_description">Descrição</string>
     <string name="add_workout_tiet_date">Data</string>
+    <string name="workout_popup_mn_edit">Editar</string>
+    <string name="workout_popup_mn_delete">Excluir</string>
 </resources>
