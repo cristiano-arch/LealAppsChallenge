@@ -1,7 +1,9 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +38,17 @@ public class WorkoutActivity extends AppCompatActivity {
             }
         });
 
+        activityWorkoutBinding.workoutActivityRvWorkout.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    activityWorkoutBinding.workoutActivityFabAdd.hide();
+                } else {
+                    activityWorkoutBinding.workoutActivityFabAdd.show();
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     public List<Workout> workoutsBuilder() {
