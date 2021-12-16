@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityWorkoutBinding;
@@ -26,6 +28,13 @@ public class WorkoutActivity extends AppCompatActivity {
         activityWorkoutBinding.workoutActivityRvWorkout.setAdapter(workoutAdapter);
         activityWorkoutBinding.workoutActivityRvWorkout.addItemDecoration(new DividerItemDecoration(
                 activityWorkoutBinding.workoutActivityRvWorkout.getContext(), DividerItemDecoration.VERTICAL));
+
+        activityWorkoutBinding.workoutActivityFabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(WorkoutActivity.this, "Add", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
