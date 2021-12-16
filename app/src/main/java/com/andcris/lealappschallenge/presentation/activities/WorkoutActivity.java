@@ -1,6 +1,7 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityWorkoutBinding;
+import com.andcris.lealappschallenge.databinding.AddWorkoutDialogBinding;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.presentation.adapters.WorkoutAdapter;
 
@@ -34,7 +36,7 @@ public class WorkoutActivity extends AppCompatActivity {
         activityWorkoutBinding.workoutActivityFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(WorkoutActivity.this, "Add", Toast.LENGTH_SHORT).show();
+                showAddWorkoutDialog();
             }
         });
 
@@ -47,6 +49,21 @@ public class WorkoutActivity extends AppCompatActivity {
                     activityWorkoutBinding.workoutActivityFabAdd.show();
                 }
                 super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+    }
+
+    public void showAddWorkoutDialog() {
+        AddWorkoutDialogBinding addWorkoutDialogBinding = AddWorkoutDialogBinding.inflate(getLayoutInflater());
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setView(addWorkoutDialogBinding.getRoot());
+        alertDialog.show();
+
+        addWorkoutDialogBinding.addWorkoutBtAdicionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(WorkoutActivity.this, "Adicionar", Toast.LENGTH_SHORT).show();
             }
         });
     }
