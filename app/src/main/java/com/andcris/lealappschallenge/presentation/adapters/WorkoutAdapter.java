@@ -1,7 +1,10 @@
 package com.andcris.lealappschallenge.presentation.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +16,11 @@ import java.util.List;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
 
+    private Context context;
     private List<Workout> workoutList;
 
-    public WorkoutAdapter(List<Workout> workoutList) {
+    public WorkoutAdapter(Context context, List<Workout> workoutList) {
+        this.context = context;
         this.workoutList = workoutList;
     }
 
@@ -32,6 +37,13 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         holder.workoutItemBinding.rvWorkoutTvName.setText(workout.getName());
         holder.workoutItemBinding.rvWorkoutTvDescription.setText(workout.getDescription());
         holder.workoutItemBinding.rvWorkoutTvDate.setText(workout.getDate());
+
+        holder.workoutItemBinding.rvWorkoutIvMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Mais " + workout.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

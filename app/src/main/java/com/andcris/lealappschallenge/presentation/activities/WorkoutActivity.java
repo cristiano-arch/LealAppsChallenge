@@ -28,7 +28,7 @@ public class WorkoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(activityWorkoutBinding.getRoot());
 
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(workoutsBuilder());
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getApplicationContext(), workoutsBuilder());
         activityWorkoutBinding.workoutActivityRvWorkout.setAdapter(workoutAdapter);
         activityWorkoutBinding.workoutActivityRvWorkout.addItemDecoration(new DividerItemDecoration(
                 activityWorkoutBinding.workoutActivityRvWorkout.getContext(), DividerItemDecoration.VERTICAL));
