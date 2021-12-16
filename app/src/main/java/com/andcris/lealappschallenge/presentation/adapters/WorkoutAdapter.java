@@ -7,8 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andcris.lealappschallenge.databinding.WorkoutItemBinding;
+import com.andcris.lealappschallenge.models.Workout;
+
+import java.util.List;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
+
+    private List<Workout> workoutList;
+
+    public WorkoutAdapter(List<Workout> workoutList) {
+        this.workoutList = workoutList;
+    }
+
     @NonNull
     @Override
     public WorkoutAdapter.WorkoutViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -17,14 +27,16 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
     @Override
     public void onBindViewHolder(@NonNull WorkoutAdapter.WorkoutViewHolder holder, int position) {
-        holder.workoutItemBinding.rvWorkoutTvName.setText("Flexão");
-        holder.workoutItemBinding.rvWorkoutTvDescription.setText("É um exercício físico realizado em posição de prancha");
-        holder.workoutItemBinding.rvWorkoutTvDate.setText("10-04-19 12:00:17");
+        Workout workout = workoutList.get(position);
+
+        holder.workoutItemBinding.rvWorkoutTvName.setText(workout.getName());
+        holder.workoutItemBinding.rvWorkoutTvDescription.setText(workout.getDescription());
+        holder.workoutItemBinding.rvWorkoutTvDate.setText(workout.getDate());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return workoutList != null ? workoutList.size() : 0;
     }
 
     public static class WorkoutViewHolder extends RecyclerView.ViewHolder {
