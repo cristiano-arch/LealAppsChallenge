@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.andcris.lealappschallenge.R;
@@ -22,16 +23,38 @@ import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
 
+    private List<Workout> workoutList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActivityWorkoutBinding activityWorkoutBinding = ActivityWorkoutBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(activityWorkoutBinding.getRoot());
 
-        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getApplicationContext(), workoutsBuilder());
+        workoutList = new ArrayList<>(workoutsBuilder());
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getApplicationContext(), workoutList);
         activityWorkoutBinding.workoutActivityRvWorkout.setAdapter(workoutAdapter);
         activityWorkoutBinding.workoutActivityRvWorkout.addItemDecoration(new DividerItemDecoration(
                 activityWorkoutBinding.workoutActivityRvWorkout.getContext(), DividerItemDecoration.VERTICAL));
+
+        activityWorkoutBinding.workoutActivityRvWorkout.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), activityWorkoutBinding.workoutActivityRvWorkout, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Workout workout = workoutList.get(position);
+                Toast.makeText(WorkoutActivity.this, "Clique simples " + workout.getName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                Workout workout = workoutList.get(position);
+                Toast.makeText(WorkoutActivity.this, "Clique longo "  + workout.getName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        }));
 
         activityWorkoutBinding.workoutActivityFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
