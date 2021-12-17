@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LealAppsChallenge">
+        <activity android:name=".presentation.activities.AddEditWorkoutActivity"
+            android:label="@string/add_edit_workout_tb_add"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.activities.WorkoutActivity"
             android:label="@string/home_activity_bt_workouts"

@@ -3,11 +3,10 @@
     <string name="home_activity_tb_label">Início</string>
     <string name="home_activity_bt_exercises">Exercícios</string>
     <string name="home_activity_bt_workouts">Treinos</string>
-    <string name="add_workout_tv_title">Adicionar novo treino</string>
-    <string name="add_workout_bt_add">Adicionar</string>
-    <string name="add_workout_tiet_name">Nome</string>
-    <string name="add_workout_tiet_description">Descrição</string>
-    <string name="add_workout_tiet_date">Data</string>
-    <string name="workout_popup_mn_edit">Editar</string>
+    <string name="add_edit_workout_tb_add">Adicionar</string>
+    <string name="add_edit_workout_tb_edit">Editar</string>
+    <string name="add_edit_workout_tiet_name">Nome</string>
+    <string name="add_edit_workout_tiet_description">Descrição</string>
+    <string name="add_edit_workout_tiet_date">Data</string>
     <string name="workout_popup_mn_delete">Excluir</string>
 </resources>
