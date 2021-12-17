@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         activityHomeBinding.homeActivityBtExercises.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(HomeActivity.this, "Exercises", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, ExerciseActivity.class));
             }
         });
     }
