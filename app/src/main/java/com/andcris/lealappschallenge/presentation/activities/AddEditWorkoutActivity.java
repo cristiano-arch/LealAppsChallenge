@@ -10,9 +10,11 @@ import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityAddEditWorkoutBinding;
 import com.andcris.lealappschallenge.models.Workout;
 
+import java.util.Objects;
+
 public class AddEditWorkoutActivity extends AppCompatActivity {
 
-    private Workout workout;
+    private String toastText = "Adicionar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +22,21 @@ public class AddEditWorkoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(activityAddEditWorkoutBinding.getRoot());
 
-        workout = getIntent().getParcelableExtra("workout");
+        Workout workout = getIntent().getParcelableExtra("workout");
 
-        Toast.makeText(this, workout != null ? "Editar " + workout.getName() : "Cadastar", Toast.LENGTH_SHORT).show();
+        if (workout != null) {
+            setTitle(R.string.add_edit_workout_tb_edit);
+            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText()).setText(workout.getName());
+            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText()).setText(workout.getDescription());
+            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(workout.getDate());
+            activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setText(R.string.add_edit_workout_tb_edit);
+            toastText = "Editar";
+        }
 
         activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddEditWorkoutActivity.this, "Adicionar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddEditWorkoutActivity.this, toastText, Toast.LENGTH_SHORT).show();
             }
         });
     }
