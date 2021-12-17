@@ -1,8 +1,12 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,7 +18,7 @@ import java.util.Objects;
 
 public class AddEditWorkoutActivity extends AppCompatActivity {
 
-    private String toastText = "Adicionar";
+    public Boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +34,28 @@ public class AddEditWorkoutActivity extends AppCompatActivity {
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText()).setText(workout.getDescription());
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(workout.getDate());
             activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setText(R.string.add_edit_workout_tb_edit);
-            toastText = "Editar";
+            isEdit = true;
         }
 
         activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddEditWorkoutActivity.this, toastText, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddEditWorkoutActivity.this, isEdit ? "Editar " + Objects.requireNonNull(workout).getName() : "Adicionar", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_edit_workout, menu);
+        return isEdit;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.add_edit_workout_mnDelete) {
+            Toast.makeText(this, "Excluir", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

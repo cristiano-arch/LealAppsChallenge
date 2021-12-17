@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/workout_popup_mnDelete"
+        android:id="@+id/add_edit_workout_mnDelete"
         app:showAsAction="never"
-        android:title="@string/workout_popup_mn_delete"/>
+        android:title="@string/add_edit_workout_mn_delete"/>
 </menu>
