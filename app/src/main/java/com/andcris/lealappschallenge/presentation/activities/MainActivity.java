@@ -16,5 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(activityMainBinding.getRoot());
 
         startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        finish();
     }
 }
