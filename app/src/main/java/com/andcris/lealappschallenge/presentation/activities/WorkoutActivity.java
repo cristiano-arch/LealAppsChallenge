@@ -39,13 +39,12 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Workout workout = workoutList.get(position);
-                Toast.makeText(WorkoutActivity.this, "Clique simples " + workout.getName(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(WorkoutActivity.this, AddEditWorkoutActivity.class)
+                        .putExtra("workout", workout));
             }
 
             @Override
             public void onLongItemClick(View view, int position) {
-                Workout workout = workoutList.get(position);
-                Toast.makeText(WorkoutActivity.this, "Clique longo "  + workout.getName(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

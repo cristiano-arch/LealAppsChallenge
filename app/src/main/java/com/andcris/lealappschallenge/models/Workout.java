@@ -1,6 +1,9 @@
 package com.andcris.lealappschallenge.models;
 
-public class Workout {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Workout implements Parcelable {
 
     private String name;
     private String description;
@@ -14,6 +17,24 @@ public class Workout {
         this.description = description;
         this.date = date;
     }
+
+    protected Workout(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        date = in.readString();
+    }
+
+    public static final Creator<Workout> CREATOR = new Creator<Workout>() {
+        @Override
+        public Workout createFromParcel(Parcel in) {
+            return new Workout(in);
+        }
+
+        @Override
+        public Workout[] newArray(int size) {
+            return new Workout[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -37,5 +58,17 @@ public class Workout {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(date);
     }
 }
