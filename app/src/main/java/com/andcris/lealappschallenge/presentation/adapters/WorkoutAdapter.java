@@ -72,14 +72,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
                 @SuppressLint("NonConstantResourceId")
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        case R.id.workout_popup_mnEdit:
-                            Toast.makeText(context, "Editar " + index, Toast.LENGTH_SHORT).show();
-                            break;
-                        case R.id.workout_popup_mnDelete:
-                            Toast.makeText(context, "Excluir " + index, Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
+                    if (menuItem.getItemId() == R.id.workout_popup_mnDelete) {
+                        Toast.makeText(context, "Excluir " + index, Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 }

@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/workout_popup_mnEdit"
-        app:showAsAction="never"
-        android:title="@string/workout_popup_mn_edit"/>
-
-    <item
         android:id="@+id/workout_popup_mnDelete"
         app:showAsAction="never"
         android:title="@string/workout_popup_mn_delete"/>
