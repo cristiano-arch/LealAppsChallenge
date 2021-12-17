@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">LealAppsChallenge</string>
-    <string name="home_activity_tb_label">Home</string>
-    <string name="home_activity_bt_exercises">Exercises</string>
-    <string name="home_activity_bt_workouts">Workouts</string>
+    <string name="home_activity_tb_label">Início</string>
+    <string name="home_activity_bt_exercises">Exercícios</string>
+    <string name="home_activity_bt_workouts">Treinos</string>
     <string name="add_workout_tv_title">Adicionar novo treino</string>
     <string name="add_workout_bt_add">Adicionar</string>
     <string name="add_workout_tiet_name">Nome</string>
