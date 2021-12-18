@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_exercise">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/rvExercise_tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="18sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Flexão"/>
+
+        <ImageView
+            android:id="@+id/rvExercise_ivImage"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvExercise_tvName"
+            tools:src="@drawable/blank"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/rvExercise_tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            app:layout_constraintStart_toStartOf="@id/rvExercise_tvName"
+            app:layout_constraintTop_toBottomOf="@id/rvExercise_ivImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="É um exercício físico realizado em posição de prancha"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
