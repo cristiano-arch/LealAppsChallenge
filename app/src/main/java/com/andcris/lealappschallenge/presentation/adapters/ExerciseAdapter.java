@@ -8,8 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ExerciseItemBinding;
+import com.andcris.lealappschallenge.models.Exercise;
+
+import java.util.List;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
+
+    List<Exercise> exerciseList;
+
+    public ExerciseAdapter(List<Exercise> exerciseList) {
+        this.exerciseList = exerciseList;
+    }
+
     @NonNull
     @Override
     public ExerciseAdapter.ExerciseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -18,14 +28,16 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseAdapter.ExerciseViewHolder holder, int position) {
-        holder.exerciseItemBinding.rvExerciseTvName.setText("Flexão");
-        holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(R.drawable.blank);
-        holder.exerciseItemBinding.rvExerciseTvDescription.setText("É um exercício físico realizado em posição de prancha");
+        Exercise exercise = exerciseList.get(position);
+
+        holder.exerciseItemBinding.rvExerciseTvName.setText(exercise.getName());
+        holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(exercise.getImage());
+        holder.exerciseItemBinding.rvExerciseTvDescription.setText(exercise.getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return exerciseList != null ? exerciseList.size() : 0;
     }
 
     public static class ExerciseViewHolder extends RecyclerView.ViewHolder {
