@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "77383473783",
+    "project_id": "lealappschallenge",
+    "storage_bucket": "lealappschallenge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77383473783:android:ae4d8f0a329412d4dbc472",
+        "android_client_info": {
+          "package_name": "com.andcris.lealappschallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77383473783-rfi8lusghjbghs93e9nl63hv47omq29v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andcris.lealappschallenge",
+            "certificate_hash": "5b74b63fd9d812450bb7ae5290cb89b5c7fb386d"
+          }
+        },
+        {
+          "client_id": "77383473783-5sav9saf2pd4k0vot5ln2qm26m245gle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK07yxNINSaihFrj4fdwoo0yTlzHNk65A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77383473783-5sav9saf2pd4k0vot5ln2qm26m245gle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
