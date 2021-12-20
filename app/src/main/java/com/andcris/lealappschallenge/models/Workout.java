@@ -10,12 +10,12 @@ public class Workout implements Parcelable {
 
     private String name;
     private String description;
-    private Date date;
+    private Long date;
 
     public Workout() {
     }
 
-    public Workout(String name, String description, Date date) {
+    public Workout(String name, String description, Long date) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -24,17 +24,11 @@ public class Workout implements Parcelable {
     protected Workout(Parcel in) {
         name = in.readString();
         description = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(description);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        if (in.readByte() == 0) {
+            date = null;
+        } else {
+            date = in.readLong();
+        }
     }
 
     public static final Creator<Workout> CREATOR = new Creator<Workout>() {
@@ -66,10 +60,27 @@ public class Workout implements Parcelable {
     }
 
     public Date getDate() {
-        return date;
+        return new Date(date);
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.getTime();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+        if (date == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(date);
+        }
     }
 }
