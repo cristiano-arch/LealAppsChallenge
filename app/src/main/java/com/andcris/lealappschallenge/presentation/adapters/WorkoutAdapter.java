@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andcris.lealappschallenge.databinding.WorkoutItemBinding;
 import com.andcris.lealappschallenge.models.Workout;
+import com.andcris.lealappschallenge.utils.Util;
 
 import java.util.Calendar;
 import java.util.List;
@@ -35,12 +36,9 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutAdapter.WorkoutViewHolder holder, int position) {
         Workout workout = workoutList.get(position);
 
-        long millisecond = workout.getDate().getTime();
-        String date = DateFormat.format("dd-MM-yyyy HH:mm", millisecond).toString();
-
         holder.workoutItemBinding.rvWorkoutTvName.setText(workout.getName());
         holder.workoutItemBinding.rvWorkoutTvDescription.setText(workout.getDescription());
-        holder.workoutItemBinding.rvWorkoutTvDate.setText(date);
+        holder.workoutItemBinding.rvWorkoutTvDate.setText(Util.formatDate(workout.getDate()));
     }
 
     @Override

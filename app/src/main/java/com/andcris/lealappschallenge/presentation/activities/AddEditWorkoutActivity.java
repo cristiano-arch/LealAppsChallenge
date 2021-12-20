@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityAddEditWorkoutBinding;
 import com.andcris.lealappschallenge.models.Workout;
+import com.andcris.lealappschallenge.utils.Util;
 
 import java.util.Objects;
 
@@ -30,12 +31,10 @@ public class AddEditWorkoutActivity extends AppCompatActivity {
         Workout workout = getIntent().getParcelableExtra("workout");
 
         if (workout != null) {
-            long millisecond = workout.getDate().getTime();
-            String date = DateFormat.format("dd-MM-yyyy HH:mm", millisecond).toString();
             setTitle(R.string.add_edit_workout_tb_edit);
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText()).setText(workout.getName());
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText()).setText(workout.getDescription());
-            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(date);
+            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(Util.formatDate(workout.getDate()));
             activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setText(R.string.add_edit_workout_tb_edit);
             isEdit = true;
         }
