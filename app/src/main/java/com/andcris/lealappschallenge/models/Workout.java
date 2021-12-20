@@ -3,16 +3,19 @@ package com.andcris.lealappschallenge.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
+
 public class Workout implements Parcelable {
 
     private String name;
     private String description;
-    private String date;
+    private Date date;
 
     public Workout() {
     }
 
-    public Workout(String name, String description, String date) {
+    public Workout(String name, String description, Date date) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -21,7 +24,17 @@ public class Workout implements Parcelable {
     protected Workout(Parcel in) {
         name = in.readString();
         description = in.readString();
-        date = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Workout> CREATOR = new Creator<Workout>() {
@@ -52,23 +65,11 @@ public class Workout implements Parcelable {
         this.description = description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(description);
-        parcel.writeString(date);
     }
 }

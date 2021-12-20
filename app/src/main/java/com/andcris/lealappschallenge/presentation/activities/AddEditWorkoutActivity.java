@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,10 +30,12 @@ public class AddEditWorkoutActivity extends AppCompatActivity {
         Workout workout = getIntent().getParcelableExtra("workout");
 
         if (workout != null) {
+            long millisecond = workout.getDate().getTime();
+            String date = DateFormat.format("dd-MM-yyyy HH:mm", millisecond).toString();
             setTitle(R.string.add_edit_workout_tb_edit);
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText()).setText(workout.getName());
             Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText()).setText(workout.getDescription());
-            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(workout.getDate());
+            Objects.requireNonNull(activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText()).setText(date);
             activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setText(R.string.add_edit_workout_tb_edit);
             isEdit = true;
         }
