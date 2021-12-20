@@ -26,7 +26,7 @@ import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
 
-    private static final String TAG = "WokroutActivity";
+    private static final String TAG = "WorkoutActivity";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<Workout> workoutList;
     private WorkoutAdapter workoutAdapter;

@@ -12,13 +12,6 @@
     android:focusable="true"
     tools:context=".presentation.activities.AddEditWorkoutActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/add_edit_workout_guideLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_edit_workout_tilName"
         android:layout_width="match_parent"
@@ -54,17 +47,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_edit_workout_tilDate"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/add_edit_workout_guideLine"
+        style="?android:spinnerStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_edit_workout_tilDescription">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
             android:hint="@string/add_edit_workout_tiet_date"
+            android:text="@string/add_edit_workout_tiet_date"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
