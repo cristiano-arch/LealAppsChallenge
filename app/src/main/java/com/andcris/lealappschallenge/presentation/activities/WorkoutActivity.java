@@ -1,5 +1,6 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,12 +30,18 @@ public class WorkoutActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<Workout> workoutList;
     private WorkoutAdapter workoutAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActivityWorkoutBinding activityWorkoutBinding = ActivityWorkoutBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(activityWorkoutBinding.getRoot());
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
 
         workoutList = new ArrayList<>();
         findAllWorkouts();
@@ -87,6 +94,9 @@ public class WorkoutActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+
                         if (!task.getResult().isEmpty()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 workoutList.add(document.toObject(Workout.class));
