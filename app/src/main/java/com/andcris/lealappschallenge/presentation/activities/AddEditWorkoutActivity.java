@@ -75,11 +75,8 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                 String name = activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText().getText().toString().trim();
                 String description = activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText().getText().toString().trim();
                 String date = activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().getText().toString().trim();
-                if (validateName(name) && validateDate(date)) {
-                    progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
-                    progressDialog.setCancelable(false);
-                    progressDialog.setMessage("Carregando...");
-                    progressDialog.show();
+                if (validateName(name) & validateDate(date)) {
+                    showProgressDialog();
                     if (!isEdit) {
                         insert(name, description, Util.getDateFromString(date.replace("/", "-")));
                     } else {
@@ -193,10 +190,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_edit_workout_mnDelete) {
-            progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Carregando...");
-            progressDialog.show();
+            showProgressDialog();
             delete(workout.getId());
         }
         return super.onOptionsItemSelected(item);
@@ -209,5 +203,12 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().setText(Util.formatDate(calendar.getTime()));
+    }
+
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
     }
 }
