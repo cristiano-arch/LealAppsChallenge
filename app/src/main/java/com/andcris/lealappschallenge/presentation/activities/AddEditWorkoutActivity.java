@@ -57,9 +57,35 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
         activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddEditWorkoutActivity.this, isEdit ? "Editar " + Objects.requireNonNull(workout).getName() : "Adicionar", Toast.LENGTH_SHORT).show();
+                if (!validateName() | !validateDate()) {
+                    Toast.makeText(AddEditWorkoutActivity.this, "Oops!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddEditWorkoutActivity.this, isEdit ? "Editar " + Objects.requireNonNull(workout).getName() : "Adicionar", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    public boolean validateName() {
+        String name = activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText().getText().toString().trim();
+        if (name.isEmpty()) {
+            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError("Campo nao pode ser vazio");
+            return false;
+        } else {
+            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateDate() {
+        String date = activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().getText().toString().trim();
+        if (date.equalsIgnoreCase("Selecione")) {
+            activityAddEditWorkoutBinding.addEditWorkoutTilDate.setError("Selecione uma data");
+            return false;
+        } else {
+            activityAddEditWorkoutBinding.addEditWorkoutTilDate.setError(null);
+            return true;
+        }
     }
 
     @Override
