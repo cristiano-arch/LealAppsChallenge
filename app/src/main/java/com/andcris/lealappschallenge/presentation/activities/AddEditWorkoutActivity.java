@@ -1,11 +1,13 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -190,8 +192,23 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_edit_workout_mnDelete) {
-            showProgressDialog();
-            delete(workout.getId());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Tem certeza que deseja excluir?")
+                    .setMessage("Não será possível reverter esta ação!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            showProgressDialog();
+                            delete(workout.getId());
+                        }
+                    })
+                    .setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }
