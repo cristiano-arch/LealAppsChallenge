@@ -19,13 +19,22 @@ import com.andcris.lealappschallenge.databinding.ActivityAddEditWorkoutBinding;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.utils.DatePickerFragment;
 import com.andcris.lealappschallenge.utils.Util;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class AddEditWorkoutActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    private static final String TAG = "AddEditWorkoutActivity";
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ActivityAddEditWorkoutBinding activityAddEditWorkoutBinding;
     public Boolean isEdit = false;
 
@@ -57,19 +66,45 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
         activityAddEditWorkoutBinding.addEditWorkoutBtAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!validateName() | !validateDate()) {
+                String name = activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText().getText().toString().trim();
+                String description = activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText().getText().toString().trim();
+                String date = activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().getText().toString().trim();
+                if (!validateName(name) | !validateDate(date)) {
                     Toast.makeText(AddEditWorkoutActivity.this, "Oops!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(AddEditWorkoutActivity.this, isEdit ? "Editar " + Objects.requireNonNull(workout).getName() : "Adicionar", Toast.LENGTH_SHORT).show();
+                    if (!isEdit) {
+                        insert(name, description, Util.getDateFromString(date.replace("/", "-")));
+                    }
                 }
             }
         });
     }
 
-    public boolean validateName() {
-        String name = activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText().getText().toString().trim();
+    public void insert(String name, String description, Date date) {
+        Map<String, Object> workout = new HashMap<>();
+        workout.put("name", name);
+        workout.put("description", description);
+        workout.put("date", date);
+
+        db.collection("workouts")
+                .add(workout)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(AddEditWorkoutActivity.this, "Sucesso!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+    public boolean validateName(String name) {
         if (name.isEmpty()) {
-            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError("Campo nao pode ser vazio");
+            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError("Nome nao pode ser vazio");
             return false;
         } else {
             activityAddEditWorkoutBinding.addEditWorkoutTilName.setError(null);
@@ -77,8 +112,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
         }
     }
 
-    public boolean validateDate() {
-        String date = activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().getText().toString().trim();
+    public boolean validateDate(String date) {
         if (date.equalsIgnoreCase("Selecione")) {
             activityAddEditWorkoutBinding.addEditWorkoutTilDate.setError("Selecione uma data");
             return false;
