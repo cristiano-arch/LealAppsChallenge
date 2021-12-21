@@ -20,10 +20,13 @@ import com.andcris.lealappschallenge.databinding.ActivityAddEditWorkoutBinding;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.utils.DatePickerFragment;
 import com.andcris.lealappschallenge.utils.Util;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -39,6 +42,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     private ActivityAddEditWorkoutBinding activityAddEditWorkoutBinding;
     private Boolean isEdit = false;
     private ProgressDialog progressDialog;
+    private Workout workout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
         super.onCreate(savedInstanceState);
         setContentView(activityAddEditWorkoutBinding.getRoot());
 
-        Workout workout = getIntent().getParcelableExtra("workout");
+        workout = getIntent().getParcelableExtra("workout");
 
         if (workout != null) {
             setTitle(R.string.add_edit_workout_tb_edit);
@@ -84,6 +88,27 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                 }
             }
         });
+    }
+
+    public void delete (String id) {
+        db.collection("workouts")
+                .document(id)
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddEditWorkoutActivity.this, "Sucesso! Treino excluído!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Log.w(TAG, "Error deleting documents.", task.getException());
+                            Toast.makeText(AddEditWorkoutActivity.this, "Oops! Algo deu errado!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     public void update(String id, String name, String description, Date date) {
@@ -168,7 +193,11 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_edit_workout_mnDelete) {
-            Toast.makeText(this, "Excluir", Toast.LENGTH_SHORT).show();
+            progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Carregando...");
+            progressDialog.show();
+            delete(workout.getId());
         }
         return super.onOptionsItemSelected(item);
     }
