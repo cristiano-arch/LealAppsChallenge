@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +38,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ActivityAddEditWorkoutBinding activityAddEditWorkoutBinding;
     public Boolean isEdit = false;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,10 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                     Toast.makeText(AddEditWorkoutActivity.this, "Oops!", Toast.LENGTH_SHORT).show();
                 } else {
                     if (!isEdit) {
+                        progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
+                        progressDialog.setCancelable(false);
+                        progressDialog.setMessage("Carregando...");
+                        progressDialog.show();
                         insert(name, description, Util.getDateFromString(date.replace("/", "-")));
                     }
                 }
@@ -92,12 +98,14 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(AddEditWorkoutActivity.this, "Sucesso!", Toast.LENGTH_SHORT).show();
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
                     }
                 });
     }

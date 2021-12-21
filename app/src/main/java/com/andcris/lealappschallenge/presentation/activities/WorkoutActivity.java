@@ -40,8 +40,6 @@ public class WorkoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(activityWorkoutBinding.getRoot());
 
-
-
         activityWorkoutBinding.workoutActivityRvWorkout.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), activityWorkoutBinding.workoutActivityRvWorkout, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
