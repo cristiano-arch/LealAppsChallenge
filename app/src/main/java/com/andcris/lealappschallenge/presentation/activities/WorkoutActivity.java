@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,25 +32,15 @@ public class WorkoutActivity extends AppCompatActivity {
     private List<Workout> workoutList;
     private WorkoutAdapter workoutAdapter;
     private ProgressDialog progressDialog;
+    private ActivityWorkoutBinding activityWorkoutBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityWorkoutBinding activityWorkoutBinding = ActivityWorkoutBinding.inflate(getLayoutInflater());
+        activityWorkoutBinding = ActivityWorkoutBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(activityWorkoutBinding.getRoot());
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Carregando...");
-        progressDialog.show();
 
-        workoutList = new ArrayList<>();
-        findAllWorkouts();
-
-        workoutAdapter = new WorkoutAdapter(getApplicationContext(), workoutList);
-        activityWorkoutBinding.workoutActivityRvWorkout.setAdapter(workoutAdapter);
-        activityWorkoutBinding.workoutActivityRvWorkout.addItemDecoration(new DividerItemDecoration(
-                activityWorkoutBinding.workoutActivityRvWorkout.getContext(), DividerItemDecoration.VERTICAL));
 
         activityWorkoutBinding.workoutActivityRvWorkout.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), activityWorkoutBinding.workoutActivityRvWorkout, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -86,6 +77,24 @@ public class WorkoutActivity extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
+        workoutList = new ArrayList<>();
+        findAllWorkouts();
+
+        workoutAdapter = new WorkoutAdapter(getApplicationContext(), workoutList);
+        activityWorkoutBinding.workoutActivityRvWorkout.setAdapter(workoutAdapter);
+        activityWorkoutBinding.workoutActivityRvWorkout.addItemDecoration(new DividerItemDecoration(
+                activityWorkoutBinding.workoutActivityRvWorkout.getContext(), DividerItemDecoration.VERTICAL));
+
+        super.onResume();
     }
 
     private void findAllWorkouts() {
