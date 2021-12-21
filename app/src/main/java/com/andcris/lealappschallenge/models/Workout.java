@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-
 public class Workout implements Parcelable {
 
+    private String id;
     private String name;
     private String description;
     private Long date;
@@ -15,13 +15,15 @@ public class Workout implements Parcelable {
     public Workout() {
     }
 
-    public Workout(String name, String description, Long date) {
+    public Workout(String id, String name, String description, Long date) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.date = date;
     }
 
     protected Workout(Parcel in) {
+        id = in.readString();
         name = in.readString();
         description = in.readString();
         if (in.readByte() == 0) {
@@ -42,6 +44,14 @@ public class Workout implements Parcelable {
             return new Workout[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -74,6 +84,7 @@ public class Workout implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
         parcel.writeString(name);
         parcel.writeString(description);
         if (date == null) {

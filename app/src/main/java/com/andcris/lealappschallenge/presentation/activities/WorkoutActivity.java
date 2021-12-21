@@ -106,9 +106,11 @@ public class WorkoutActivity extends AppCompatActivity {
 
                         if (!task.getResult().isEmpty()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                workoutList.add(document.toObject(Workout.class));
-                                workoutAdapter.notifyDataSetChanged();
+                                Workout workout = document.toObject(Workout.class);
+                                workout.setId(document.getId());
+                                workoutList.add(workout);
                             }
+                            workoutAdapter.notifyDataSetChanged();
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }

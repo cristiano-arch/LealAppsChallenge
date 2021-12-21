@@ -37,7 +37,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
     private static final String TAG = "AddEditWorkoutActivity";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ActivityAddEditWorkoutBinding activityAddEditWorkoutBinding;
-    public Boolean isEdit = false;
+    private Boolean isEdit = false;
     private ProgressDialog progressDialog;
 
     @Override
@@ -71,19 +71,46 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                 String name = activityAddEditWorkoutBinding.addEditWorkoutTilName.getEditText().getText().toString().trim();
                 String description = activityAddEditWorkoutBinding.addEditWorkoutTilDescription.getEditText().getText().toString().trim();
                 String date = activityAddEditWorkoutBinding.addEditWorkoutTilDate.getEditText().getText().toString().trim();
-                if (!validateName(name) | !validateDate(date)) {
-                    Toast.makeText(AddEditWorkoutActivity.this, "Oops!", Toast.LENGTH_SHORT).show();
-                } else {
+                if (validateName(name) && validateDate(date)) {
+                    progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setMessage("Carregando...");
+                    progressDialog.show();
                     if (!isEdit) {
-                        progressDialog = new ProgressDialog(AddEditWorkoutActivity.this);
-                        progressDialog.setCancelable(false);
-                        progressDialog.setMessage("Carregando...");
-                        progressDialog.show();
                         insert(name, description, Util.getDateFromString(date.replace("/", "-")));
+                    } else {
+                        update(workout.getId(), name, description, Util.getDateFromString(date.replace("/", "-")));
                     }
                 }
             }
         });
+    }
+
+    public void update(String id, String name, String description, Date date) {
+        Map<String, Object> workout = new HashMap<>();
+        workout.put("name", name);
+        workout.put("description", description);
+        workout.put("date", date);
+
+        db.collection("workouts")
+                .document(id)
+                .update(workout)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AddEditWorkoutActivity.this, "Sucesso! Treino atualizado!", Toast.LENGTH_SHORT).show();
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                        Toast.makeText(AddEditWorkoutActivity.this, "Oops! Algo deu errado!", Toast.LENGTH_SHORT).show();
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+                    }
+                });
     }
 
     public void insert(String name, String description, Date date) {
