@@ -97,14 +97,16 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddEditWorkoutActivity.this, "Sucesso!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddEditWorkoutActivity.this, "Sucesso! Treino criado!", Toast.LENGTH_SHORT).show();
                         if(progressDialog.isShowing()) progressDialog.dismiss();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(AddEditWorkoutActivity.this, "Oops! Algo deu errado!", Toast.LENGTH_SHORT).show();
                         if(progressDialog.isShowing()) progressDialog.dismiss();
                     }
                 });
@@ -112,7 +114,7 @@ public class AddEditWorkoutActivity extends AppCompatActivity implements DatePic
 
     public boolean validateName(String name) {
         if (name.isEmpty()) {
-            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError("Nome nao pode ser vazio");
+            activityAddEditWorkoutBinding.addEditWorkoutTilName.setError("Nome não pode ser vazio");
             return false;
         } else {
             activityAddEditWorkoutBinding.addEditWorkoutTilName.setError(null);
