@@ -11,31 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LealAppsChallenge">
-        <activity android:name=".presentation.activities.RegisterActivity"
+        <activity android:name=".presentation.activities.register.RegisterActivity"
             android:label="@string/login_activity_tv_register"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.LoginActivity"
+            android:name=".presentation.activities.login.LoginActivity"
             android:label="@string/login_activity_tb_login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.ExerciseActivity"
+            android:name=".presentation.activities.exercise.ExerciseActivity"
             android:label="@string/home_activity_bt_exercises"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.AddEditWorkoutActivity"
+            android:name=".presentation.activities.workout.AddEditWorkoutActivity"
             android:label="@string/add_edit_workout_tb_add"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.WorkoutActivity"
+            android:name=".presentation.activities.workout.WorkoutActivity"
             android:label="@string/home_activity_bt_workouts"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.HomeActivity"
+            android:name=".presentation.activities.home.HomeActivity"
             android:label="@string/home_activity_tb_label"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.activities.MainActivity"
+            android:name=".presentation.activities.main.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

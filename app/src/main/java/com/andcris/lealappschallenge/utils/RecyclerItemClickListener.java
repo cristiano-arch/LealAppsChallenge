@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.utils;
 
 import android.content.Context;
 import android.view.GestureDetector;

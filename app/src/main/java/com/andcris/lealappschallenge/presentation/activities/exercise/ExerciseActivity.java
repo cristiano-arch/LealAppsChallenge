@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.presentation.activities.exercise;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

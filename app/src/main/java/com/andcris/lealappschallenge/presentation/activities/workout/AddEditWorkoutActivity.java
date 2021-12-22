@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.presentation.activities.workout;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;

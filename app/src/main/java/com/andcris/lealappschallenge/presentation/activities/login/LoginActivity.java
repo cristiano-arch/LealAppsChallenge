@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.presentation.activities.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.andcris.lealappschallenge.databinding.ActivityLoginBinding;
+import com.andcris.lealappschallenge.presentation.activities.home.HomeActivity;
+import com.andcris.lealappschallenge.presentation.activities.register.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

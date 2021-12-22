@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.presentation.activities.workout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.andcris.lealappschallenge.databinding.ActivityWorkoutBinding;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.presentation.adapters.WorkoutAdapter;
+import com.andcris.lealappschallenge.utils.RecyclerItemClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;

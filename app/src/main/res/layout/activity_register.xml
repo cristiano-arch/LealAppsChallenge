@@ -10,7 +10,7 @@
     android:paddingBottom="24dp"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    tools:context=".presentation.activities.RegisterActivity">
+    tools:context=".presentation.activities.register.RegisterActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/register_activity_tilEmail"

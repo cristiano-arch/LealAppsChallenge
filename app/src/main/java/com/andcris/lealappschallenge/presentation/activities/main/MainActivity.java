@@ -1,4 +1,4 @@
-package com.andcris.lealappschallenge.presentation.activities;
+package com.andcris.lealappschallenge.presentation.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.andcris.lealappschallenge.databinding.ActivityMainBinding;
+import com.andcris.lealappschallenge.presentation.activities.home.HomeActivity;
+import com.andcris.lealappschallenge.presentation.activities.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

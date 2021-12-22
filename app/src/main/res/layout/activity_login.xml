@@ -10,7 +10,7 @@
     android:paddingBottom="24dp"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    tools:context=".presentation.activities.LoginActivity">
+    tools:context=".presentation.activities.login.LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_activity_tilEmail"
