@@ -3,6 +3,7 @@ package com.andcris.lealappschallenge.presentation.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,14 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityHomeBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActivityHomeBinding activityHomeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(activityHomeBinding.getRoot());
+
+        mAuth = FirebaseAuth.getInstance();
 
         activityHomeBinding.homeActivityBtWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +45,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, ExerciseActivity.class));
             }
         });
+    }
+
+    public void logoutUser() {
+        mAuth.signOut();
+        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        finish();
     }
 
     @Override
@@ -53,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(HomeActivity.this, "Sair", Toast.LENGTH_LONG).show();
+                            logoutUser();
                         }
                     })
                     .setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
