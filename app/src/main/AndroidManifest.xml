@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LealAppsChallenge">
-        <activity android:name=".presentation.activities.ExerciseActivity"
+        <activity android:name=".presentation.activities.LoginActivity"
+            android:label="@string/login_activity_tb_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".presentation.activities.ExerciseActivity"
             android:label="@string/home_activity_bt_exercises"
             android:screenOrientation="portrait" />
         <activity

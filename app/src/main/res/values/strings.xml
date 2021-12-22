@@ -10,4 +10,9 @@
     <string name="add_edit_workout_tiet_date">Data</string>
     <string name="add_edit_workout_tiet_date_selecione">Selecione</string>
     <string name="add_edit_workout_mn_delete">Excluir</string>
+    <string name="login_activity_tiet_email">Email</string>
+    <string name="login_activity_tiet_password">Senha</string>
+    <string name="login_activity_tb_login">Entrar</string>
+    <string name="login_activity_tv_no_account">Não tem uma Conta?</string>
+    <string name="login_activity_tv_register">Cadastre-se</string>
 </resources>
