@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding.loginActivityTvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Cadastre-se", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }
