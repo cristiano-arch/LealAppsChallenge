@@ -31,7 +31,8 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         Exercise exercise = exerciseList.get(position);
 
         holder.exerciseItemBinding.rvExerciseTvName.setText(exercise.getName());
-        holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(exercise.getImage());
+        holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(R.drawable.blank);
+        /*holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(exercise.getImage());*/
         holder.exerciseItemBinding.rvExerciseTvDescription.setText(exercise.getDescription());
     }
 

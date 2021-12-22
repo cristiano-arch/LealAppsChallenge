@@ -1,43 +1,82 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityExerciseBinding;
+import com.andcris.lealappschallenge.databinding.ActivityWorkoutBinding;
 import com.andcris.lealappschallenge.models.Exercise;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.presentation.adapters.ExerciseAdapter;
+import com.andcris.lealappschallenge.presentation.adapters.WorkoutAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ExerciseActivity extends AppCompatActivity {
 
+    private static final String TAG = "ExerciseActivity";
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private List<Exercise> exerciseList;
+    private ProgressDialog progressDialog;
+    private ExerciseAdapter exerciseAdapter;
+    private ActivityExerciseBinding activityExerciseBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityExerciseBinding activityExerciseBinding = ActivityExerciseBinding.inflate(getLayoutInflater());
+        activityExerciseBinding = ActivityExerciseBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(activityExerciseBinding.getRoot());
+    }
 
-        ExerciseAdapter ExerciseAdapter = new ExerciseAdapter(exercisesBuilder());
-        activityExerciseBinding.exerciseActivityRvExercise.setAdapter(ExerciseAdapter);
+    @Override
+    protected void onResume() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
+        exerciseList = new ArrayList<>();
+        findAllExercises();
+
+        exerciseAdapter = new ExerciseAdapter(exerciseList);
+        activityExerciseBinding.exerciseActivityRvExercise.setAdapter(exerciseAdapter);
         activityExerciseBinding.exerciseActivityRvExercise.addItemDecoration(new DividerItemDecoration(
                 activityExerciseBinding.exerciseActivityRvExercise.getContext(), DividerItemDecoration.VERTICAL));
+
+        super.onResume();
     }
-    
-    public List<Exercise> exercisesBuilder() {
-        return Arrays.asList(new Exercise("Flexão", R.drawable.blank, "É um exercício físico realizado em posição de prancha."),
-                new Exercise("Ponte", R.drawable.blank, "Deite-se de bruços no chão, numa superfície plana."),
-                new Exercise("Agachamento na cadeira", R.drawable.blank, "Com uma cadeira, faça movimentos de sentar e levantar."),
-                new Exercise("Agachamento na parede", R.drawable.blank, "Apoie as costas na parede e busque manter os joelhos flexionados."),
-                new Exercise("Aviãozinho", R.drawable.blank, "De pé, recline o tronco para frente enquanto levata uma das pernas para trás."),
-                new Exercise("Abdominal", R.drawable.blank, "Deite-se de barriga para cima, faça movimentos de elevação do tronco em direção dos joelhos."),
-                new Exercise("Remada", R.drawable.blank, "Apoie-se com uma das mãos na altura do peitoral e realize movimentos de ida e vinda."),
-                new Exercise("Extensão dos pés", R.drawable.blank, "De pé, com o corpo ereto, erga-se na ponta dos pés, subindo e descendo."),
-                new Exercise("Pular corda", R.drawable.blank, "Pule a corda!"),
-                new Exercise("Corrida", R.drawable.blank, "Corra!"));
+
+    private void findAllExercises() {
+        db.collection("exercises")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(progressDialog.isShowing()) progressDialog.dismiss();
+
+                        if (!task.getResult().isEmpty()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                exerciseList.add(document.toObject(Exercise.class));
+                            }
+                            exerciseAdapter.notifyDataSetChanged();
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }

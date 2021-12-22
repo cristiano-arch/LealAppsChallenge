@@ -3,15 +3,15 @@ package com.andcris.lealappschallenge.models;
 public class Exercise {
 
     private String name;
-    private int image;
+    private String imageUrl;
     private String description;
 
     public Exercise() {
     }
 
-    public Exercise(String name, int image, String description) {
+    public Exercise(String name, String imageUrl, String description) {
         this.name = name;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.description = description;
     }
 
@@ -23,12 +23,12 @@ public class Exercise {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescription() {
