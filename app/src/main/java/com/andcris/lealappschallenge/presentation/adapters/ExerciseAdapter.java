@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ExerciseItemBinding;
 import com.andcris.lealappschallenge.models.Exercise;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -31,9 +32,13 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         Exercise exercise = exerciseList.get(position);
 
         holder.exerciseItemBinding.rvExerciseTvName.setText(exercise.getName());
-        holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(R.drawable.blank);
-        /*holder.exerciseItemBinding.rvExerciseIvImage.setImageResource(exercise.getImage());*/
         holder.exerciseItemBinding.rvExerciseTvDescription.setText(exercise.getDescription());
+
+        Glide.with(holder.exerciseItemBinding.rvExerciseIvImage.getContext())
+                .load(exercise.getImageUrl())
+                .placeholder(R.drawable.common_google_signin_btn_icon_dark)
+                .error(R.drawable.blank)
+                .into(holder.exerciseItemBinding.rvExerciseIvImage);
     }
 
     @Override
