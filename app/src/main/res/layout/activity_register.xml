@@ -49,7 +49,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/register_activity_btLogin"
+        android:id="@+id/register_activity_bt_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
     android:foregroundGravity="clip_horizontal"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/register_activity_btLogin">
+    app:layout_constraintTop_toBottomOf="@id/register_activity_bt_register">
 
     <TextView
         android:id="@+id/register_activity_tvHasAccount"
