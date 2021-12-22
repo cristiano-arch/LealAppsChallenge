@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.andcris.lealappschallenge.R;
 import com.andcris.lealappschallenge.databinding.ActivityMainBinding;
 import com.andcris.lealappschallenge.presentation.activities.home.HomeActivity;
 import com.andcris.lealappschallenge.presentation.activities.login.LoginActivity;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ActivityMainBinding activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
+        rodarSplashScreen();
         setContentView(activityMainBinding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
@@ -34,5 +36,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }
         finish();
+    }
+
+    public void rodarSplashScreen() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setTheme(R.style.Theme_LealAppsChallenge);
     }
 }
