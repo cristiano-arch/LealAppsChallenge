@@ -1,9 +1,9 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.andcris.lealappschallenge.databinding.ActivityRegisterBinding;
 import com.andcris.lealappschallenge.utils.Util;

@@ -1,20 +1,16 @@
 package com.andcris.lealappschallenge.presentation.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.andcris.lealappschallenge.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+
 import com.andcris.lealappschallenge.databinding.ActivityExerciseBinding;
-import com.andcris.lealappschallenge.databinding.ActivityWorkoutBinding;
 import com.andcris.lealappschallenge.models.Exercise;
-import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.presentation.adapters.ExerciseAdapter;
-import com.andcris.lealappschallenge.presentation.adapters.WorkoutAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +18,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExerciseActivity extends AppCompatActivity {

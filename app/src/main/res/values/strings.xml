@@ -16,4 +16,5 @@
     <string name="login_activity_tv_no_account">Não tem uma Conta?</string>
     <string name="login_activity_tv_register">Cadastre-se</string>
     <string name="register_activity_tv_has_account">Ja tem uma Conta?</string>
+    <string name="home_activity_mn_logout">Sair</string>
 </resources>

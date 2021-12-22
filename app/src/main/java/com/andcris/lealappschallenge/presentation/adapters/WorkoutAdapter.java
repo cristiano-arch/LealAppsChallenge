@@ -1,7 +1,6 @@
 package com.andcris.lealappschallenge.presentation.adapters;
 
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,9 +11,7 @@ import com.andcris.lealappschallenge.databinding.WorkoutItemBinding;
 import com.andcris.lealappschallenge.models.Workout;
 import com.andcris.lealappschallenge.utils.Util;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
 
